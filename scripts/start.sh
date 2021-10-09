@@ -1,5 +1,3 @@
 #!/bin/bash
 cd /home/ubuntu/AnimalChat/server
-sudo nohup node index.js &
-disown %1
-exit
+authbind --deep pm2 start index.js
