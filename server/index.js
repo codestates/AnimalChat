@@ -10,7 +10,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(
   cors({
-    origin: ["https://animal-chat-hc9ora1on-kingshuny.vercel.app"],
+    origin: ["https://animal-chat.vercel.app/"],
     credentials: true,
     methods: ["GET", "POST", "OPTIONS"],
   })
