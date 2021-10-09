@@ -16,7 +16,7 @@ app.use(
   })
 )
 app.use(cookieParser())
-app.get("https://animal-chat.vercel.app", function (req, res) {
+app.get("/", function (req, res) {
   res.send("이게 보인다면 파이프라인 자동배포까지 모두 성공12345")
 })
 
