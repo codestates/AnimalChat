@@ -1,3 +1,3 @@
 #!/bin/bash
 cd /home/ubuntu/AnimalChat/server
-sudo node index.js
+sudo nohup node index.js &
