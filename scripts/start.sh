@@ -1,4 +1,3 @@
 #!/bin/bash
 cd /home/ubuntu/AnimalChat/server
-authbind --deep pm2 stop 0
 authbind --deep pm2 start index.js
