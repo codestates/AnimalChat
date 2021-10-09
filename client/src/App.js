@@ -12,7 +12,7 @@ function App() {
   function onclickButton() {
     axios
       .get(
-        "http://http://ec2-3-34-2-204.ap-northeast-2.compute.amazonaws.com:80",
+        "http://http://ec2-3-34-2-204.ap-northeast-2.compute.amazonaws.com",
         { withCredentials: true }
       )
       .then(function (response) {
