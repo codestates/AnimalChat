@@ -16,11 +16,14 @@ app.use(
   })
 )
 app.use(cookieParser())
-app.get("/", function (req, res) {
-  res.send("이게 보인다면 파이프라인 자동배포까지 모두 성공12345")
-})
+app.get(
+  "http://http://ec2-3-34-2-204.ap-northeast-2.compute.amazonaws.com/",
+  function (req, res) {
+    res.send("이게 보인다면 파이프라인 자동배포까지 모두 성공12345")
+  }
+)
 
-const HTTPS_PORT = process.env.HTTPS_PORT || 443
+const HTTPS_PORT = process.env.HTTPS_PORT || 80
 
 let server
 if (fs.existsSync("./key.pem") && fs.existsSync("./cert.pem")) {
