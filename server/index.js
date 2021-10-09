@@ -10,7 +10,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: ["https://animal-chat-hc9ora1on-kingshuny.vercel.app"],
     credentials: true,
     methods: ["GET", "POST", "OPTIONS"],
   })
@@ -20,7 +20,7 @@ app.get("/", function (req, res) {
   res.send("이게 보인다면 파이프라인 자동배포까지 모두 성공12345")
 })
 
-const HTTPS_PORT = process.env.HTTPS_PORT || 4003
+const HTTPS_PORT = process.env.HTTPS_PORT || 80
 
 let server
 if (fs.existsSync("./key.pem") && fs.existsSync("./cert.pem")) {

@@ -11,7 +11,10 @@ function App() {
   const [isLogin, setIsLogin] = useState(false)
   function onclickButton() {
     axios
-      .get("http://localhost:4003/", { withCredentials: true })
+      .get(
+        "http://http://ec2-3-34-2-204.ap-northeast-2.compute.amazonaws.com:80",
+        { withCredentials: true }
+      )
       .then(function (response) {
         setIsLogin(true)
       })
