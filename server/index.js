@@ -20,7 +20,7 @@ app.get("/", function (req, res) {
   res.send("이게 보인다면 파이프라인 자동배포까지 모두 성공12345")
 })
 
-const HTTPS_PORT = process.env.HTTPS_PORT || 80
+const HTTPS_PORT = process.env.HTTPS_PORT || 4003
 
 let server
 if (fs.existsSync("./key.pem") && fs.existsSync("./cert.pem")) {
