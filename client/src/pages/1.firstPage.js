@@ -125,7 +125,7 @@ export const FirstPage = (props) => {
                 Animal Chat🐣
                 <SignInModalForm>
                   <div>
-                    <div>아이디</div>
+                    <div>아이디12</div>
                     <input type="id" onChange={handleInputValue("id")} />
                   </div>
                   <div></div>
