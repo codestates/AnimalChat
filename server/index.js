@@ -17,7 +17,9 @@ app.use(
 )
 app.use(cookieParser())
 app.get("/", function (req, res) {
-  res.send("이게 보인다면 파이프라인 자동배포까지 모두 성공!!!!!")
+  res.send(
+    "이게 보인다면 파이프라인 자동배포까지 모두 성공...내용이 바뀌어여해"
+  )
 })
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 80
