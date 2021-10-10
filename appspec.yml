@@ -3,7 +3,6 @@ os: linux
 files:
   - source: /
     destination: /home/ubuntu/AnimalChat
-
 hooks:
   ApplicationStop:
     - location: scripts/stop.sh
@@ -13,4 +12,4 @@ hooks:
       runas: root
   ApplicationStart:
     - location: scripts/start.sh
-      runas: root
+      runas: root 
