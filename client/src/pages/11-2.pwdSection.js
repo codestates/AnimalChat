@@ -56,6 +56,7 @@ export default function PasswordChange() {
     isCurWrong: true
   });
   const { isCurPwdInput, isCurWrong } = curPwdValidity;
+  // TODO curPwd 중복 검사 (axios 필요)
 
   // new pwd validity check states
   const [ newPwdValidity, setNewPwdValidity ] = useState({
@@ -65,9 +66,6 @@ export default function PasswordChange() {
     isAllNumbers: false,
     isAllAlphabets: false
   });
-
-  // TODO curPwd 중복 검사 (axios 필요)
-
 
   useEffect(() => {
     function getValidity(str) {
@@ -93,14 +91,6 @@ export default function PasswordChange() {
             console.log('숫자를 포함해야 함');
             setNewPwdValidity({ ...newPwdValidity, isAllAlphabets: true, isAllNumbers: false });
           }
-
-          if (str.length < 4) {
-            console.log('*비밀번호 길이는 4자 이상*');
-            setNewPwdValidity({ ...newPwdValidity, isTooShort: true, isTooLong: false });
-          } else if (str.length > 15) {
-            console.log('*비밀번호 길이는 15자 이하*');
-            setNewPwdValidity({ ...newPwdValidity, isTooLong: true, isTooShort: false });
-          }
         }
       }
     }
@@ -118,7 +108,7 @@ export default function PasswordChange() {
       <StyledPwdChangeSection>
         <StyledPwdInputsArea>
           <StyledPwdFieldset>
-            <p className="inputTitle">현재 비밀번호</p>
+            <h3 className="inputTitle">현재 비밀번호</h3>
             <input
               type='password'
               name='curPwd'
@@ -126,9 +116,12 @@ export default function PasswordChange() {
               value={curPwd}
               onChange={handleOnChange}
             />
+            <ul className="validityRequirements">
+              { curPwd.length === 0 ? <StyledList>현재 비밀번호를 입력하세요.</StyledList> : '' }
+            </ul>
           </StyledPwdFieldset>
           <StyledPwdFieldset>
-            <p className="inputTitle">새 비밀번호</p>
+            <h3 className="inputTitle">새 비밀번호</h3>
             <input
               type='password'
               name='newPwd'
@@ -138,18 +131,24 @@ export default function PasswordChange() {
             />
             <ul className="validityRequirements">
               {newPwd.length !== 0 ? '' : <StyledList>비밀번호를 입력해주세요</StyledList>}
-              {newPwd.length < 4 ? <StyledList>4 이상</StyledList> : ''}
-              {newPwd.length > 15 ? <StyledList>15 이하</StyledList> : ''}
+              {newPwd.length < 4 ? <StyledList>4자 이상 입력해야 합니다.</StyledList> : ''}
+              {newPwd.length > 15 ? <StyledList>15 이하로 입력해야 합니다.</StyledList> : ''}
               {/* {
                 (newPwd) => {
                   const regOnlyNumber = /^[0-9]/; // 숫자만
-                  regOnlyNumber.test(newPwd) ? <StyledList>문자를 포함해야 합니다</StyledList> : '';
+                  regOnlyNumber.test(newPwd) ? 
+                    <StyledList>문자를 포함해야 합니다.</StyledList>
+                  :
+                    '';
                 }
               }
               {
                 (newPwd) => {
                   const regOnlyAlphabets = /^[a-zA-Z]*$/; // 문자만
-                  regOnlyAlphabets.test(newPwd) ? <StyledList>숫자를 포함해야 합니다</StyledList> : '';
+                  regOnlyAlphabets.test(newPwd) ?
+                    <StyledList>숫자를 포함해야 합니다.</StyledList>
+                  :
+                    '';
                 }
               } */}
             </ul>
