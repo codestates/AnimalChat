@@ -53,7 +53,7 @@ export default function PasswordChange() {
   // TODO old pwd validity check states
   const [ curPwdValidity, setCurPwdValidity ] = useState({
     isCurPwdInput: false,
-    isCurWrong: true
+    isCurRight: false
   });
   const { isCurPwdInput, isCurWrong } = curPwdValidity;
   // TODO curPwd 중복 검사 (axios 필요)
@@ -87,9 +87,6 @@ export default function PasswordChange() {
       isIncludingBothTypes(inputs.newPwd);
     }
   }, [inputs.newPwd]);
-
-  // 새 비밀번호 유효성 렌더링용 함수 - 정규식 이용
-  
 
   // button event
   const handleButtonClick = (e) => {
