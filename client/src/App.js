@@ -10,7 +10,7 @@ import PostEdit from "./pages/7.postEdit"
 import PostRead from "./pages/8.postRead"
 import MyPage from "./pages/9.myPage"
 import MyPageEdit from "./pages/10.myPageEdit"
-import PwdEdit from "./pages/11.pwdEdit"
+// import PwdEdit from "./pages/11.pwdEdit"
 
 import "./App.css"
 const url =
@@ -61,9 +61,9 @@ function App() {
           <Route path="/mypageedit">
             <MyPageEdit />
           </Route>
-          <Route path="/pwdedit">
+          {/* <Route path="/pwdedit">
             <PwdEdit />
-          </Route>
+          </Route> */}
 
           <Route path="/">
             {isLogin ? (
