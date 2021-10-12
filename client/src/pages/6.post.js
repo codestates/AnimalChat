@@ -166,6 +166,11 @@ export const Post = (props) => {
   // 2. 제목과 내용 필수, 사진은 선택으로 함
   const [inputTitle, setInputTitle] = useState("")
   const [inputContent, setInputContent] = useState("")
+  const [photo, setPhoto] = useState("")
+  const [uploadedImg, setUploadedImg] = useState({
+    fileName: null,
+    filePath: null,
+  })
   // const [inputImg, setInputImg] = useState() // 사진 수정했을때
 
   // 작성되어지는 제목, 내용
@@ -182,28 +187,33 @@ export const Post = (props) => {
   // 수정된 게시물 정보 -> 서버로
   // 수정 페이지 postread에서 보여야함
   const postSendButton = () => {
-    if (inputTitle.length > 0 && inputContent.length > 0) {
+    if (
+      inputTitle.length > 0 &&
+      inputContent.length > 0 &&
+      uploadedImg.fileName
+    ) {
       // 제목, 내용 작성했을 때
       console.log("작성완료 쪽")
       axios({
         url: url + "/postsend",
         method: "post",
         data: {
+          user_id: 1,
           post_title: inputTitle,
           post_content: inputContent,
-          // post_img: inputImg,
+          post_img: "/img/" + uploadedImg.fileName,
+          animalcategory: props.curAnimal,
         },
         withCredentials: true,
       })
-      .then(() => {
-        alert('작성 완료')
-        // 작성 완료
-        history.goBack() // 이전페이지로 돌아가야함
-      })
-      .catch(err => console.log(err))
-
-    }else{
-      alert('제목과 내용은 필수사항 입니다.')
+        .then(() => {
+          alert("작성 완료")
+          // 작성 완료
+          history.goBack() // 이전페이지로 돌아가야함
+        })
+        .catch((err) => console.log(err))
+    } else {
+      alert("제목과 내용은 필수사항 입니다.")
     }
   }
   // 취소 버튼
@@ -212,16 +222,12 @@ export const Post = (props) => {
     history.goBack()
   }
   ///////////////////여기서부터 사진업로드 기능구현////////////////
-  const [photo, setPhoto] = useState("")
-  const [uploadedImg, setUploadedImg] = useState({
-    fileName: "",
-    fillPath: "",
-  })
 
   const onSubmit = (e) => {
     e.preventDefault()
     const formData = new FormData()
     formData.append("img", photo)
+    console.log(formData)
     axios
       .post(url + "/postsend", formData, {
         "Content-Type": "application/json",

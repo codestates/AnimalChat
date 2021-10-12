@@ -138,7 +138,7 @@ export default function Signup(props) {
       }).then((res) => {
         if (res.status === 201) {
           alert("회원가입 완료")
-          props.loginFunc()
+          props.SignUpFin()
         } else if (res.status === 202) {
           alert("아이디 중복입니다.")
         } else if (res.status === 203) {
