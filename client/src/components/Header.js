@@ -25,9 +25,8 @@ const TitleArea = styled.div`
 `;
 
 const url =
-  process.env.REACT_APP_URL ||
-  "http://ec2-3-34-2-204.ap-northeast-2.compute.amazonaws.com"
-
+  process.env.REACT_APP_URL || process.env.REACT_EC2_URL
+  
 export default function Header() {
   const [isLogin, setIsLogin] = useState(false)
   const [userinfo, setUserinfo] = useState(null)

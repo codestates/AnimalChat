@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   post.init({
+    user_id: DataTypes.STRING,
     post_title: DataTypes.STRING,
     post_content: DataTypes.STRING,
     post_img: DataTypes.STRING,

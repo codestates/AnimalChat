@@ -1,31 +1,25 @@
 const { user } = require('../../models')
-require("dotenv").config();
-const { 
-  generateAccessToken,
-  sendAccessToken
-} = require('../tokenFunc');
+const { isAuthorized } = require('../tokenFunc');
 
 module.exports = async(req, res) => {
     //비밀번호 변경 
-    //기존에 있는 정보인지 확인하고 
-    //인증을 한번 해야되는것 같음 
-    //여기서 다시 토큰 발급
-    
-    const userInfoData = await user.findOne({
-        where: {
-            password: req.body.password
-        }
+    //기존에 있는 정보인지 확인하고 (토큰에 있는 정보인지 확인하고)
+    //update로 데이터베이스 수정 
+    const accessTokenData = isAuthorized(req);
+    //console.log(accessTokenData)
+    if (!accessTokenData) {
+        return res.json({ data: null, message: 'not authorized' });
+      }
+
+    const { user_id, password } = accessTokenData
+    //user_id와 password가 토큰발급한 정보와 같으면 비밀번호를 업데이트해라  
+    user.update({
+        password: req.body.password
+    }, 
+    { where: { 
+        user_id: user_id,
+        password: password
+     }
     })
-    .then((data) => {
-        if(!userInfoData){ //수정전 비밀번호 입력시 일치하지 않는 정보일 때 
-            return res.status(401).send({ data: null, message: 'not authorized' })
-          }
-          else{ //수정전 비밀번호 입력시 일치하는 정보일 때 
-            const accessToken = generateAccessToken(data.dataValues)
-            return sendAccessToken(res, accessToken, data.dataValues)
-          }
-    })
-    .catch((err) => {
-        console.log(err);
-      })
+    res.status(201).send()
 };
