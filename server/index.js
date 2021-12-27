@@ -20,7 +20,7 @@ app.use(
     cors({
         origin: [url],
         credentials: true,
-        methods: ["GET", "POST", "DELETE", "OPTIONS"],
+        methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     })
 )
 app.use(logger("dev")) //서버요청 로그
@@ -44,29 +44,35 @@ app.get("/", (req, res) => {
 
 //get
 app.get("/auth", controllers.auth)
-app.get("/postlist", controllers.postlist) //signin, signout, signup,
-app.get("/userinfo", controllers.userinfo) // postlist -> userinfo 마이페이지에서 반려동물 정보 확인할 때(myPage.js)
+app.get("/postlist", controllers.postlist)
+app.get("/userinfo", controllers.userinfo) 
 
 //post
-app.post("/sendcomment", controllers.sendcomment) // postlist -> commentsend 게시글 볼 때 댓글 작성시(postRead.js)
-app.post("/like", controllers.like)
-app.post("/editpost", upload.single("img"), controllers.editpost) // postlist -> postedit 게시글 수정시(postEdit.js)
-app.post("/sendpost", upload.single("img"), controllers.sendpost) // postlist -> postsend 게시글 작성시(post.js)
-app.post("/profilephoto", upload.single("img"), controllers.profilephoto) // postlist -> postsend 게시글 작성시(post.js)
-app.post("/editpw", controllers.editpw) // postlist -> pwchange 비밀번호 수정시(pwdEdit.js)
-app.post("/commentlist", controllers.commentlist) // postlist -> commentlist 게시글 볼 때 다른 사용자가 남긴 댓글 보기(postRead.js)
-app.post("/signin", controllers.signin) // postlist -> signin 로그인시(signin.js)
-app.post("/signout", controllers.signout) // postlist -> signout 로그아웃 버튼을 누르면 리다이렉팅(어느페이지에서 수정할지 아직 모름)
-app.post("/signup", controllers.signup) // postlist -> signup 회원가입시(signup.js)
-app.post("/edituserinfo", controllers.edituserinfo) // postlist -> userinfochange 반려동물 정보수정시(myPageEdit.js)
+app.post("/sendcomment", controllers.sendcomment)
+app.post("/like", controllers.like) 
+app.post("/commentlist", controllers.commentlist)
+app.post("/signin", controllers.signin) 
+app.post("/checkpw", controllers.checkpw)
+app.post("/signout", controllers.signout) 
+app.post("/signup", controllers.signup)
 app.post("/readlike", controllers.readlike)
-app.post("/animalphoto", upload.single("img"), controllers.animalphoto) // 반려동물사진 추가
+app.post("/sendpost", upload.single("img"), controllers.sendpost) 
+app.post("/profilephoto", upload.single("img"), controllers.profilephoto)
+app.post("/animalphoto", upload.single("img"), controllers.animalphoto)
+
+//put(전체)
+app.put("/editpw", controllers.editpw)
+
+//patch(일부)
+app.patch("/editpost", upload.single("img"), controllers.editpost)
+app.patch("/edituserinfo", controllers.edituserinfo) 
+
 
 //delete
-app.delete("/deletecomment", controllers.deletecomment) // postlist -> commentdelete 게시글에서 댓글 삭제시(postRead.js)
-app.delete("/deletepost", controllers.deletepost) // postlist -> postdelete 게시글에서 해당 게시글 삭제시(postRead.js)
-app.delete("/removeuser", controllers.removeuser) // userinfo -> userremove 마이페이지에서 회원탈퇴(myPage.js)
-app.delete("/deleteanimal", controllers.deleteanimal) // userinfo -> userremove 마이페이지에서 회원탈퇴(myPage.js)
+app.delete("/deletecomment", controllers.deletecomment) 
+app.delete("/deletepost", controllers.deletepost) 
+app.delete("/removeuser", controllers.removeuser) 
+app.delete("/deleteanimal", controllers.deleteanimal) 
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 80
 

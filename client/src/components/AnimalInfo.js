@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useEffect } from "react"
+
 import styled from "styled-components"
 import { useHistory } from "react-router-dom"
 
@@ -9,8 +9,17 @@ const Outer = styled.div`
     flex-direction: column;
     width: 300px;
     padding: 1rem;
-    background-color: #fff9ee;
-    border-radius: 10%;
+    background-color: #ffffff;
+    border-radius: 20px;
+    margin: 0 auto;
+
+    /* 반응형 */
+    @media screen and (max-width: 740px) {
+        padding: 0.5rem;
+    }
+    @media screen and (max-width: 700px) {
+        width: 270px;
+    }
 `
 
 const PictureAndText = styled.div`
@@ -22,6 +31,10 @@ const PictureSpace = styled.div`
     flex: 1.5;
     justify-content: center;
     align-items: center;
+
+    @media screen and (max-width: 740px) {
+        margin-right: 1rem;
+    }
 `
 
 const RoundPicture = styled.img`
@@ -30,6 +43,9 @@ const RoundPicture = styled.img`
     width: 120px;
     height: 120px;
     margin: 1rem;
+    @media screen and (max-width: 740px) {
+        margin: 0;
+    }
 `
 // 반려동물 사진이 없을때
 const NonePicture = styled.div`
@@ -52,12 +68,13 @@ const TextSpace = styled.div`
     flex-direction: column;
     justify-content: center;
 
-    & > h4 {
+    h4 {
         margin: 0;
-        padding: 0;
+        padding-top: 5px;
+        font-weight: bold;
     }
 
-    & > p {
+    p {
         margin: 0;
         padding: 0;
     }
@@ -69,9 +86,13 @@ const ButtonSpace = styled.div`
     align-items: center;
 
     & > button {
-        background-color: transparent;
-        color: red;
-        text-decoration: underline;
+        background-color: #fc8e57;
+        border-radius: 10px;
+        width: 25px;
+        height: 25px;
+        margin: 5px 0;
+        font-weight: bold;
+        color: #ffffff;
     }
 `
 
@@ -84,10 +105,8 @@ const url =
 
 export default function AnimalInfo(props) {
     const history = useHistory()
-    // console.log("AnimalInfo.js : ", props)
 
     const deleteButtonHandler = () => {
-        // console.log("동물정보 삭제 버튼 동작 확인")
         axios({
             url: url + `/deleteanimal`,
             method: "delete",
@@ -97,50 +116,47 @@ export default function AnimalInfo(props) {
             },
             withCredentials: true,
         }).then((res) => {
-            console.log(res)
             history.push("/")
             history.push("/mypage")
-            // setUserAnimalInfo(res.data)
         })
     }
 
     return (
-        <div className="singleAnimalInfo">
-            <Outer>
-                <PictureAndText>
-                    <PictureSpace>
-                        {props.animalcard.animal_photo === null ? (
-                            <NonePicture>
-                                <p>사진이 없습니다.</p>
-                            </NonePicture>
-                        ) : (
-                            <RoundPicture
-                                src={url + props.animalcard.animal_photo}
-                                alt="반려동물사진"
-                            />
-                        )}
-                    </PictureSpace>
-                    <TextSpace>
-                        {/* TODO : 이름과 출생년도 props, 악시오스 요청 */}
-                        <div>
-                            <h4>반려동물 종류</h4>
-                            <p>{props.animalcard.animaltype}</p>
-                        </div>
-                        <div>
-                            <h4>반려동물 이름</h4>
-                            <p>{props.animalcard.animalname}</p>
-                        </div>
-                        <div>
-                            <h4>출생년도</h4>
-                            <p>{props.animalcard.animalyob}</p>
-                        </div>
-                    </TextSpace>
-                </PictureAndText>
-                <ButtonSpace>
-                    {/* TODO : 수정 페이지 Link, 라우팅 */}
-                    <Button onClick={deleteButtonHandler}>삭제</Button>
-                </ButtonSpace>
-            </Outer>
-        </div>
+        <Outer>
+            <PictureAndText>
+                <PictureSpace>
+                    {props.animalcard.animal_photo === null ? (
+                        <NonePicture>
+                            <p>사진이 없습니다.</p>
+                        </NonePicture>
+                    ) : (
+                        <RoundPicture
+                            src={url + props.animalcard.animal_photo}
+                            alt="반려동물사진"
+                        />
+                    )}
+                </PictureSpace>
+                <TextSpace>
+                    {/* TODO : 이름과 출생년도 props, 악시오스 요청 */}
+                    <div>
+                        <h4>반려동물 종류</h4>
+                        <p>{props.animalcard.animaltype}</p>
+                    </div>
+                    <div>
+                        <h4>반려동물 이름</h4>
+                        <p>{props.animalcard.animalname}</p>
+                    </div>
+                    <div>
+                        <h4>출생년도</h4>
+                        <p>{props.animalcard.animalyob}</p>
+                    </div>
+                </TextSpace>
+            </PictureAndText>
+            <ButtonSpace>
+                {/* TODO : 수정 페이지 Link, 라우팅 */}
+                <Button onClick={deleteButtonHandler}>X</Button>
+            </ButtonSpace>
+        </Outer>
+        // </div>
     )
 }

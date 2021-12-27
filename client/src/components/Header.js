@@ -1,19 +1,16 @@
-import React, { useState } from "react"
+import React from "react"
 import axios from "axios"
 import { Link } from "react-router-dom" // useHistory
 import styled from "styled-components"
 
-// styled components
 const Outer = styled.div`
-    width: 100vw;
+    width: 100%;
     background-color: white;
 `
 
 const HeaderFlexDiv = styled.div`
     display: flex;
     flex-direction: column;
-    /* background-color: #ffd489; */
-    // background-color: #fef4de;
 `
 
 const TopButtonsArea = styled.div`
@@ -21,7 +18,6 @@ const TopButtonsArea = styled.div`
     justify-content: flex-end;
     align-items: center;
     padding: 1rem;
-    // border: 1px solid red;
 
     & button {
         font-size: 1.05rem;
@@ -37,6 +33,10 @@ const TopButtonsArea = styled.div`
             background-color: #fedcaa;
         }
     }
+
+    @media screen and (max-width: 575px) {
+        padding: 0.5rem;
+    }
 `
 
 const TitleArea = styled.div`
@@ -45,7 +45,6 @@ const TitleArea = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    // border: 1px solid red;
 
     & button {
         font-size: 1.2rem;
@@ -55,6 +54,17 @@ const TitleArea = styled.div`
     & h2 {
         margin-top: 0.5rem;
         font-size: 1.1rem;
+    }
+    @media screen and (max-width: 575px) {
+        padding: 1.5rem;
+    }
+    @media screen and (max-width: 460px) {
+        h1 {
+            font-size: 2rem;
+        }
+        h2 {
+            font-size: 0.8rem;
+        }
     }
 `
 const IconPhoto = styled.img`
@@ -66,30 +76,23 @@ const url =
     "http://ec2-54-180-102-202.ap-northeast-2.compute.amazonaws.com"
 
 export default function Header(props) {
-    // const [isLogin, setIsLogin] = useState(false)
-    // const [userinfo, setUserinfo] = useState(null)
 
-    // button event
     function logoutEventListener() {
-        // console.log('send logout request here')
         axios({
             url: url + "/signout",
             method: "post",
             withCredentials: true,
+        }).then((res) => {
+            localStorage.removeItem("accessToken")
+            props.setUserinfo(null)
+            props.setIsLogin(false)
         })
-            //확인필요
-            .then((res) => {
-                localStorage.removeItem("accessToken")
-                props.setUserinfo(null)
-                props.setIsLogin(false)
-            })
     }
 
     return (
         <Outer className="headerComponent">
             <HeaderFlexDiv>
                 <TopButtonsArea className="topButtonsArea">
-                    {/* 링크 연결 : 마이페이지-라우팅, 로그아웃-클릭 이벤트, 랜딩페이지 라우팅*/}
                     <Link to="/mypage">
                         <button className="headerTopButtons">My</button>
                     </Link>

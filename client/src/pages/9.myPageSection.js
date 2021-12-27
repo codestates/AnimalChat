@@ -7,8 +7,9 @@ import React, { useState, useEffect } from "react"
 import { useHistory } from "react-router-dom"
 
 const Outer = styled.div`
-    background-color: #feefd5;
-    height: 100vh;
+    background-color: #fff9ee;
+    height: 100%;
+    padding: 5% 0;
 `
 
 const IdDisplay = styled.div`
@@ -16,16 +17,34 @@ const IdDisplay = styled.div`
     padding: 1rem;
     display: flex;
     justify-content: center;
+    #userId {
+        font-size: 20px;
+        font-weight: bold;
+    }
+    @media screen and (max-width: 375px) {
+        #userId {
+            font-size: 15px;
+        }
+    }
 `
 
 const AnimalsList = styled.div`
     box-sizing: content-box;
-    padding: 1rem;
+    padding: 2rem 1rem 3rem 1rem;
     display: grid;
     gap: 2rem;
     grid-template-columns: repeat(auto-fit, 350px);
     justify-content: center;
     align-content: center;
+    @media screen and (max-width: 784px) {
+        grid-template-columns: 1fr 1fr;
+    }
+    @media screen and (max-width: 610px) {
+        grid-template-columns: 1fr;
+    }
+    @media screen and (max-width: 460px) {
+        padding: 1rem;
+    }
 `
 
 const ButtonsArea = styled.div`
@@ -37,21 +56,41 @@ const ButtonsArea = styled.div`
     padding: 1rem;
 
     & > button {
-        font-size: 1rem;
-        background-color: #db7092;
-        color: white;
+        font-size: 1.2rem;
         font-weight: bold;
         box-sizing: content-box;
         margin: 0.5rem;
+        width: 30%;
+        height: 2.5rem;
+        border-radius: 10px;
+    }
+    #addAnimal {
+        background-color: #ffffff;
+        color: #588156;
+    }
+    #editPw {
+        background-color: #588156;
+        color: #ffffff;
+    }
+
+    @media screen and (max-width: 751px) {
+        button {
+            width: 50%;
+        }
+    }
+    @media screen and (max-width: 400px) {
+        button {
+            font-size: 1rem;
+            height: 2rem;
+        }
     }
 `
 
 const QuitButton = styled.button`
-    background-color: transparent;
+    background-color: #fc8e57;
+    color: #ffffff;
     border-radius: none;
-    text-decoration: underline;
     border: none;
-    color: #aaaaaa;
 `
 
 const AddAnimalModalContainer = styled.div`
@@ -80,68 +119,81 @@ const AddAnimalModalBackDrop = styled.div`
 const AddAnimalModalView = styled.div`
     display: flex;
     flex-direction: column;
-    // justify-content: center;
     justify-content: space-around;
     border-radius: 20px;
-    background-color: #feefd5;
-    min-width: 400px;
-    // width: 40vw;
-    // height: 60vw;
-    width: 500px;
-
-    height: 600px;
-    color: #bd2020;
+    background-color: #fff9ee;
+    width: 400px;
+    height: 300px;
     font-size: 1.5rem;
     font-weight: bold;
 
-    // & button.close {
-    //     display: flex;
-    //     justify-content: flex-end;
-    //     margin-top: 1rem;
-    //     padding: 0.5rem 2rem;
-    //     font-size: 2rem;
-    //     text-decoration: underline;
-    //     color: #7b7b7b;
-    //     border: none;
-    //     background-color: transparent;
-    // }
+    @media screen and (max-width: 450px) {
+        width: 370px;
+    }
+    @media screen and (max-width: 376px) {
+        width: 355px;
+    }
+`
+
+const DeleteAccount = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-radius: 20px;
+    background-color: #fff9ee;
+    width: 400px;
+    height: 550px;
+    font-size: 1.5rem;
+    font-weight: bold;
+
+    @media screen and (max-width: 450px) {
+        width: 370px;
+    }
+    @media screen and (max-width: 376px) {
+        width: 350px;
+    }
 `
 
 const ButtonSpace1 = styled.div`
     display: flex;
     justify-content: center;
-    // align-items: center;
 `
 const ButtonSpace2 = styled.div`
     display: flex;
     justify-content: space-around;
-    // align-items: center;
 
     & button {
-        width: 110px;
-        border: none;
-        border-radius: 2rem;
-        margin: auto 0.5rem;
-        padding: 0.5rem 1rem;
-        background-color: #ffb83e;
-        color: red;
-        font-size: 1.2rem;
-
         &:hover {
-            color: black;
-            background-color: red;
+            // color: black;
+            // background-color: red;
+            background-color: #ffffff;
+            color: #588156;
         }
     }
 `
-const Button = styled.button`
-    // margin-top: 2rem;
-    // margin-right: 5.5rem;
+const Button3 = styled.button`
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-sizing: content-box;
+    margin: 0.5rem;
+    width: 20%;
+    height: 2.5rem;
+    border-radius: 10px;
+    background-color: #588156;
+    color: #ffffff;
+`
+const Button4 = styled.button`
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-sizing: content-box;
+    margin: 0.5rem;
+    width: 20%;
+    height: 2.5rem;
+    border-radius: 10px;
+    background-color: #fc8e57;
+    color: #ffffff;
 `
 
-const Buttos = styled.button`
-    // margin-right: 5rem;
-    // margin-top: 2rem;
-`
 const PhotoBoxAndIdDisplay = styled.form`
     display: flex;
     flex-direction: column;
@@ -149,11 +201,19 @@ const PhotoBoxAndIdDisplay = styled.form`
 `
 
 const PhotoBox = styled.img`
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
 
     border-radius: 50%;
     border: 1px solid silver;
+    @media screen and (max-width: 660px) {
+        width: 150px;
+        height: 150px;
+    }
+    @media screen and (max-width: 375px) {
+        width: 100px;
+        height: 100px;
+    }
 `
 const PhotoBox2 = styled.div`
     display: flex;
@@ -181,6 +241,14 @@ const CameraImg2 = styled.img`
     background-color: white;
     border-radius: 100%;
     border: 1px solid silver;
+    @media screen and (max-width: 660px) {
+        width: 40px;
+        margin-left: 40px;
+    }
+    @media screen and (max-width: 375px) {
+        width: 30px;
+        margin-left: 30px;
+    }
 `
 
 const FormInputTag = styled.input`
@@ -327,7 +395,7 @@ export default function MyPageSection(props) {
                     </CameraImg>
                 </PhotoBox3>
                 <IdDisplay>
-                    <span>{props.userinfo.user_id}</span>
+                    <span id="userId">아이디 : {props.userinfo.user_id}</span>
                 </IdDisplay>
                 <FormInputTag
                     type="file"
@@ -350,8 +418,12 @@ export default function MyPageSection(props) {
                 )}
             </AnimalsList>
             <ButtonsArea>
-                <button onClick={addAnimal}>동물 추가하기</button>
-                <button onClick={pwdChange}>비밀번호 수정</button>
+                <button onClick={addAnimal} id="addAnimal">
+                    동물 추가하기
+                </button>
+                <button onClick={pwdChange} id="editPw">
+                    비밀번호 수정
+                </button>
                 <QuitButton onClick={() => deleteUserInfo()}>
                     회원탈퇴
                 </QuitButton>
@@ -375,7 +447,7 @@ export default function MyPageSection(props) {
             {removeUsers ? (
                 <AddAnimalModalContainer>
                     <AddAnimalModalBackDrop>
-                        <AddAnimalModalView className={"3"}>
+                        <DeleteAccount className={"3"}>
                             <ButtonSpace1>
                                 <h1>회원탈퇴</h1>
                             </ButtonSpace1>
@@ -401,14 +473,14 @@ export default function MyPageSection(props) {
                                 </DivTag3>
                             </DivTag1>
                             <ButtonSpace2>
-                                <Button onClick={() => closeRemoveModal()}>
+                                <Button3 onClick={() => closeRemoveModal()}>
                                     아니오
-                                </Button>
-                                <Buttos onClick={() => removeInfomation()}>
+                                </Button3>
+                                <Button4 onClick={() => removeInfomation()}>
                                     예
-                                </Buttos>
+                                </Button4>
                             </ButtonSpace2>
-                        </AddAnimalModalView>
+                        </DeleteAccount>
                     </AddAnimalModalBackDrop>
                 </AddAnimalModalContainer>
             ) : null}
