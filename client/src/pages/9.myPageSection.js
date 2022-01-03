@@ -268,9 +268,9 @@ const DivTag3 = styled.div`
     font-weight: normal;
 `
 
-let url = process.env.REACT_APP_API_URL
-if(!url) url = "http://ec2-13-125-84-11.ap-northeast-2.compute.amazonaws.com"
-// let url = "http://ec2-13-125-84-11.ap-northeast-2.compute.amazonaws.com"
+// let url = process.env.REACT_APP_API_URL
+// if(!url) url = "http://ec2-13-209-35-203.ap-northeast-2.compute.amazonaws.com"
+let url = "http://ec2-13-209-35-203.ap-northeast-2.compute.amazonaws.com"
 
 export default function MyPageSection(props) {
     const infoAnimal = props.userinfo

@@ -18,13 +18,14 @@ import GlobalStyle from "./components/GlobalStyle"
 import PwdEditPage from "./pages/11-1.pwdEdit"
 import "./App.css"
 
-let url = process.env.REACT_APP_API_URL
+// let url = process.env.REACT_APP_API_URL
+// if(!url) url = "http://ec2-13-209-35-203.ap-northeast-2.compute.amazonaws.com"
 
 function App() {
-    if(!url) {
-            url = "http://ec2-13-125-84-11.ap-northeast-2.compute.amazonaws.com"
-    }
-    // let url = "http://ec2-13-125-84-11.ap-northeast-2.compute.amazonaws.com"
+    // if(!url) {
+        //         url = "http://ec2-13-125-84-11.ap-northeast-2.compute.amazonaws.com"
+        // }
+    let url = "http://ec2-13-209-35-203.ap-northeast-2.compute.amazonaws.com"
     
     const [isLogin, setIsLogin] = useState(false)
     const [curAnimal, setCurAnimal] = useState("home")

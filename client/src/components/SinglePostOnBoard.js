@@ -112,9 +112,9 @@ const ImgvTag = styled.img`
     border-radius: 50%;
 `
 
-let url = process.env.REACT_APP_API_URL
-if(!url) url = "http://ec2-13-125-84-11.ap-northeast-2.compute.amazonaws.com"
-// let url = "http://ec2-13-125-84-11.ap-northeast-2.compute.amazonaws.com"
+// let url = process.env.REACT_APP_API_URL
+// if(!url) url = "http://ec2-13-209-35-203.ap-northeast-2.compute.amazonaws.com"
+let url = "http://ec2-13-209-35-203.ap-northeast-2.compute.amazonaws.com"
 
 export default function SinglePostOnBoard({ mockBgColor, post, curPostRead }) {
     const history = useHistory()
