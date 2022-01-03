@@ -8,8 +8,8 @@ const express = require("express")
 const app = express()
 const controllers = require("./controllers")
 const multer = require("multer")
-const logger = require("morgan")
-// const morgan = require("morgan")
+//const logger = require("morgan")
+const morgan = require("morgan")
 const helmet = require("helmet")
 const hpp = require("hpp")
 
@@ -26,16 +26,16 @@ app.use(
         methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     })
 )
-app.use(logger("dev")) //서버요청 로그
+//app.use(logger("dev")) //서버요청 로그
 
 //보안설정
-// if(process.env.NODE_ENV === "production") {
-//     app.use(morgan("combined"));
-//     app.use(helmet({ contentSecurityPolicy: false }));
-//     app.use(hpp());
-// }else{
-//     app.use(morgan('dev'));
-// }
+if(process.env.NODE_ENV === "production") {
+    app.use(morgan("combined"));
+    app.use(helmet({ contentSecurityPolicy: false }));
+    app.use(hpp());
+}else{
+    app.use(morgan('dev'));
+}
 
 
 app.use(cookieParser())
