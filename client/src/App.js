@@ -16,13 +16,16 @@ import PostRead from "./pages/8.postRead"
 import MyPage from "./pages/9.myPage"
 import GlobalStyle from "./components/GlobalStyle"
 import PwdEditPage from "./pages/11-1.pwdEdit"
-
 import "./App.css"
-const url =
-    process.env.REACT_APP_URL ||
-    "http://ec2-54-180-102-202.ap-northeast-2.compute.amazonaws.com"
+
+let url = process.env.REACT_APP_API_URL
 
 function App() {
+    if(!url) {
+            url = "http://ec2-13-125-84-11.ap-northeast-2.compute.amazonaws.com"
+    }
+    // let url = "http://ec2-13-125-84-11.ap-northeast-2.compute.amazonaws.com"
+    
     const [isLogin, setIsLogin] = useState(false)
     const [curAnimal, setCurAnimal] = useState("home")
     const [userinfo, setUserinfo] = useState("")

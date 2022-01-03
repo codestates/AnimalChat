@@ -14,7 +14,6 @@ module.exports = {
   sendpost: require("./users/sendpost"),
   profilephoto: require("./users/profilephoto"),
   animalphoto: require("./users/animalphoto"),
-  
   editpw: require("./users/editpw"),
   editpost: require("./users/editpost"),
   edituserinfo: require("./users/edituserinfo"),

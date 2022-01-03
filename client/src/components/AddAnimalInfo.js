@@ -6,10 +6,6 @@ import "react-datepicker/dist/react-datepicker.css"
 
 axios.defaults.withCredentials = true
 
-const url =
-    process.env.REACT_APP_URL ||
-    "http://ec2-54-180-102-202.ap-northeast-2.compute.amazonaws.com"
-
 const Outer = styled.div`
     box-sizing: content-box;
     display: flex;
@@ -111,11 +107,16 @@ const PhotoUpLoadBtn = styled.button`
     margin-top: 5px;
 `
 
+let url = process.env.REACT_APP_API_URL
+if(!url) url = "http://ec2-13-125-84-11.ap-northeast-2.compute.amazonaws.com"
+// let url = "http://ec2-13-125-84-11.ap-northeast-2.compute.amazonaws.com"
+
 export default function AddAnimalInfo({
     infoAnimal,
     addButtonHandler,
     cancleButton,
 }) {
+    
     const [animalInfo, setAnimalInfo] = useState({
         userId: infoAnimal.user_id,
         animalName: "",

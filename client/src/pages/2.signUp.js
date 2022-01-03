@@ -8,10 +8,6 @@ import "react-datepicker/dist/react-datepicker.css"
 
 axios.defaults.withCredentials = true
 
-const url =
-    process.env.REACT_APP_URL ||
-    "http://ec2-54-180-102-202.ap-northeast-2.compute.amazonaws.com"
-
 const Outer = styled.div`
     display: flex;
     flex-direction: column;
@@ -116,7 +112,11 @@ const ButtonsArea = styled.div`
     }
 `
 
-export default function Signup(props) {
+let url = process.env.REACT_APP_API_URL
+if(!url) url = "http://ec2-13-125-84-11.ap-northeast-2.compute.amazonaws.com"
+// let url = "http://ec2-13-125-84-11.ap-northeast-2.compute.amazonaws.com"
+
+export default function Signup(props) {    
     const history = useHistory()
     const [userInfo, setUserInfo] = useState({
         userId: "",

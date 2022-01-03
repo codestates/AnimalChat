@@ -13,9 +13,10 @@ const Outer = styled.div`
     /* height: 100vh; */
     background-color: #FFF9EE;
 `
-const url =
-    process.env.REACT_APP_URL ||
-    "http://ec2-54-180-102-202.ap-northeast-2.compute.amazonaws.com"
+
+let url = process.env.REACT_APP_API_URL
+if(!url) url = "http://ec2-13-125-84-11.ap-northeast-2.compute.amazonaws.com"
+// let url = "http://ec2-13-125-84-11.ap-northeast-2.compute.amazonaws.com"
 
 export default function MainPage(props) {
     useEffect(() => {

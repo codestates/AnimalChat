@@ -217,11 +217,14 @@ const IconPhoto2 = styled.img`
 `
 
 axios.defaults.withCredentials = true
-const url =
-    process.env.REACT_APP_URL ||
-    "http://ec2-54-180-102-202.ap-northeast-2.compute.amazonaws.com"
+
+let url = process.env.REACT_APP_API_URL
+if(!url) url = "http://ec2-13-125-84-11.ap-northeast-2.compute.amazonaws.com"
+// let url = "http://ec2-13-125-84-11.ap-northeast-2.compute.amazonaws.com"
 
 export const FirstPage = (props) => {
+    console.log("build 해야되는지 확인즁");
+    console.log("firstpage의 url가 제대로 들어오남?: ", url);
     const [isOpen, setIsOpen] = useState(false)
     const [loginInfo, setLoginInfo] = useState({ id: "", password: "" })
     const [errMessage, setErrMessage] = useState(false)
@@ -243,6 +246,8 @@ export const FirstPage = (props) => {
         if (loginInfo === null || !loginInfo.id || !loginInfo.password) {
             setErrMessage(" 아이디와 패스워드를 입력하세요.")
         } else {
+            console.log(url);
+
             //로그인 정보를 모두 입력했을 때
             axios({
                 url: url + "/signin",
@@ -252,6 +257,7 @@ export const FirstPage = (props) => {
                 withCredentials: true,
             })
                 .then((res) => {
+                    console.log("then의 res.data : ", res.data);
                     localStorage.setItem(
                         "accessToken",
                         JSON.stringify(res.data.accessToken)
